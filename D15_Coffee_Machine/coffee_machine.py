@@ -44,10 +44,10 @@ def main():
 
     #Declaramos variables
     money = 0
-    money_in = 0
 
     #Bucle para mostrar menú
     while(True):
+        money_in = 0
         option = input("What would you like? (espresso/latte/cappuccino): ").lower().strip()
 
         #Acciones segun opcion escogida
