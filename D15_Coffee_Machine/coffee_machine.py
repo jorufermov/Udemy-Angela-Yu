@@ -58,7 +58,7 @@ def main():
                     #insert coins
                     money_in = insert_coins()
                     #Suficiente dinero??
-                    
+
             case "report":
                 #Sacar reporte
                 show_report(money)
