@@ -2,31 +2,74 @@
 
 from data import MENU, resources
 
-#1. Prompt user by asking “​What would you like? (espresso/latte/cappuccino):​”
+#Variables globales
+PENNIE = 0.01
+NICKLE = 0.05
+DIME = 0.10
+QUARTER = 0.25
 
-#Declaramos variables
-money = 0
+#Declaración de funciones
 
-#Bucle para mostrar menú
-while(True):
-    option = input("What would you like? (espresso/latte/cappuccino): ").lower().strip()
+#print report
+def show_report(money):
+    print(f"Water: {resources['water']}ml")
+    print(f"Milk: {resources['milk']}ml")
+    print(f"Coffee: {resources['coffee']}g")
+    print(f"Money: ${money}")
 
-    #Acciones segun opcion escogida
-    match option:
-        case "espresso" | "latte" | "cappuccino":
-            #Preparar cafés
-            pass
+#Check resources
+def check_resources(option):
+    for ingredient in MENU[option]["ingredients"]:
+        if resources[ingredient] < MENU[option]["ingredients"][ingredient]:
+            print(f"Sorry there is not enough {ingredient}")
+            return False
+    return True
 
-        case "report":
-            #Sacar reporte
-            print(f"Water: {resources['water']}ml")
-            print(f"Milk: {resources['milk']}ml")
-            print(f"Coffee: {resources['coffee']}g")
-            print(f"Money: ${money}")
+#insert coins
+def insert_coins():
+    print("Please insert coins.")
+    pennies = input("How many pennies?: ")
+    nickles = input("How many nickles?: ")
+    dimes = input("How many dimes?: ")
+    quarters = input("How many quarters?: ")
 
-        case "off":
-            #Apagar maquina de café
-            exit()
-            
-        case _:
-            print("Opción no válida")
+    #Calcular total de dinero introducido
+    money_in = PENNIE * float(pennies) + NICKLE * float(nickles) + DIME * float(dimes) + QUARTER * float(quarters)
+
+    return money_in
+
+#MAIN function
+def main():
+    #1. Prompt user by asking “​What would you like? (espresso/latte/cappuccino):​”
+
+    #Declaramos variables
+    money = 0
+    money_in = 0
+
+    #Bucle para mostrar menú
+    while(True):
+        option = input("What would you like? (espresso/latte/cappuccino): ").lower().strip()
+
+        #Acciones segun opcion escogida
+        match option:
+            case "espresso" | "latte" | "cappuccino":
+                #check enough resources
+                if check_resources(option):
+                    #insert coins
+                    money_in = insert_coins()
+                    #Suficiente dinero??
+                    
+            case "report":
+                #Sacar reporte
+                show_report(money)
+
+            case "off":
+                #Apagar maquina de café
+                exit()
+                
+            case _:
+                print("Opción no válida")
+
+
+if __name__ == "__main__":
+    main()
