@@ -47,6 +47,7 @@ def main():
 
     #Bucle para mostrar menú
     while(True):
+        #Inicializamos a cero el dinero introducido
         money_in = 0
         option = input("What would you like? (espresso/latte/cappuccino): ").lower().strip()
 
