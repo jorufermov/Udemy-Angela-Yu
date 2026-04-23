@@ -54,10 +54,11 @@ def main():
         match option:
             case "espresso" | "latte" | "cappuccino":
                 #check enough resources
-                if check_resources(option):
-                    #insert coins
-                    money_in = insert_coins()
-                    #Suficiente dinero??
+                if not check_resources(option):
+                    continue
+                #insert coins
+                money_in = insert_coins()
+                #Suficiente dinero??
 
             case "report":
                 #Sacar reporte
