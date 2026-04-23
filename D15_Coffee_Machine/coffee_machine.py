@@ -27,3 +27,6 @@ while(True):
         case "off":
             #Apagar maquina de café
             exit()
+            
+        case _:
+            print("Opción no válida")
