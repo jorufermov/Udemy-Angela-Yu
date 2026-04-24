@@ -27,14 +27,23 @@ def check_resources(option):
 
 #insert coins
 def insert_coins():
-    print("Please insert coins.")
-    pennies = input("How many pennies?: ")
-    nickles = input("How many nickles?: ")
-    dimes = input("How many dimes?: ")
-    quarters = input("How many quarters?: ")
+    try:
+        print("Please insert coins.")
+        pennies = int(input("How many pennies?: "))
+        nickles = int(input("How many nickles?: "))
+        dimes = int(input("How many dimes?: "))
+        quarters = int(input("How many quarters?: "))
+    except ValueError:
+        pennies = 0
+        nickles = 0
+        dimes = 0
+        quarters = 0
+        print("Error inserting coins!!!")
+        money_in = -1
+        return money_in
 
     #Calcular total de dinero introducido
-    money_in = PENNIE * float(pennies) + NICKLE * float(nickles) + DIME * float(dimes) + QUARTER * float(quarters)
+    money_in = PENNIE * pennies + NICKLE * nickles + DIME * dimes + QUARTER * quarters
 
     return money_in
 
@@ -60,7 +69,9 @@ def main():
                 #insert coins
                 money_in = insert_coins()
                 #Suficiente dinero??
-
+                if money_in == -1:
+                    continue
+                print("meh")
             case "report":
                 #Sacar reporte
                 show_report(money)
