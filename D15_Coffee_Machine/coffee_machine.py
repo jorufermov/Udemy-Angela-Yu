@@ -71,7 +71,24 @@ def main():
                 #Suficiente dinero??
                 if money_in == -1:
                     continue
-                print("meh")
+                if money_in < MENU[option]["cost"]:
+                    print("Sorry that's not enough money. Money refunded.")
+                    continue
+
+                #Si hay mas pasta de lo que vale se le devuelve el sobrante
+                if money_in > MENU[option]["cost"]:
+                    money_back = money_in - MENU[option]["cost"]
+                    print(f"Here is ${money_back:.2f} in change.")
+
+                #Actualizamos ingredientes
+                for ingredient in MENU[option]["ingredients"]:
+                    resources[ingredient] -= MENU[option]["ingredients"][ingredient]
+
+                #Ingresamos pasta
+                money += MENU[option]["cost"]
+                #Servimos café
+                print(f"Here is your {option}. Enjoy!")
+
             case "report":
                 #Sacar reporte
                 show_report(money)
